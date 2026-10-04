@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "email-auth-checker"
+version = "0.1.0"
+description = "Check SPF, DKIM, DMARC and MX records and explain, in plain words, what will send your mail to spam."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Zakaria Mamoumi" }]
+keywords = ["email", "deliverability", "spf", "dkim", "dmarc", "dns"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Programming Language :: Python :: 3",
+    "Topic :: Communications :: Email",
+    "Topic :: Internet :: Name Service (DNS)",
+]
+dependencies = ["dnspython>=2.2"]
+
+[project.optional-dependencies]
+test = ["pytest>=7", "cryptography>=41"]
+
+[project.scripts]
+email-auth-check = "email_auth_checker.cli:main"
+
+[tool.setuptools]
+packages = ["email_auth_checker"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "tests"]
